@@ -1,9 +1,0 @@
-D:\pro\ChatAppClient\ChatAppClient\bin\Debug\ChatAppClient.exe.config
-D:\pro\ChatAppClient\ChatAppClient\obj\Debug\ChatAppClient.csprojResolveAssemblyReference.cache
-D:\pro\ChatAppClient\ChatAppClient\obj\Debug\ChatAppClient.Form1.resources
-D:\pro\ChatAppClient\ChatAppClient\obj\Debug\ChatAppClient.Properties.Resources.resources
-D:\pro\ChatAppClient\ChatAppClient\obj\Debug\ChatAppClient.csproj.GenerateResource.Cache
-D:\pro\ChatAppClient\ChatAppClient\bin\Debug\ChatAppClient.exe
-D:\pro\ChatAppClient\ChatAppClient\bin\Debug\ChatAppClient.pdb
-D:\pro\ChatAppClient\ChatAppClient\obj\Debug\ChatAppClient.exe
-D:\pro\ChatAppClient\ChatAppClient\obj\Debug\ChatAppClient.pdb

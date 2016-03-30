@@ -10,15 +10,9 @@ namespace RoomGuideDataLayer
     {
         public bool IsVaildUser(string userName, string password)
         {
-            RoomGuideDataStructure.DataService dataServiceStructure = new RoomGuideDataStructure.DataService();
-            dataServiceStructure.databaseName = "bachelorGuide";
-            dataServiceStructure.password = "Sql2012";
-            dataServiceStructure.userName = "sa";
-            dataServiceStructure.serverName = @"5GWSIT130\SQLEXPRESS";
-
-
-            RGUtitlity.DataService dataService = new RGUtitlity.DataService(dataServiceStructure);
-            dataService.ExecuteDataTable();
+            RGUtitlity.DataService dataService = new RGUtitlity.DataService();
+            string query = @"SELECT * FROM USERS WHERE USERNAME = '"+userName +"' AND PASSWORD = '"+ password +"'";
+            dataService.ExecuteDataTable(query);
             return false;
         }
     }

@@ -8,63 +8,67 @@ using System.Xml;
 using System.Data.SqlClient;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
+using System.IO;
+using System.Configuration;
 
 
 namespace RGUtitlity
 {
     public class DataService
     {
-        private SqlDatabase database;
-        private DbConnection conncetion;
-        RoomGuideDataStructure.DataService dataService = new RoomGuideDataStructure.DataService();
+        SqlConnection sqlConnection = new SqlConnection();
 
-        public DataService(RoomGuideDataStructure.DataService _dataService)
+        public DataService()
         {
-            dataService = _dataService;
-            this.database = new SqlDatabase(this.GetConnectionString(dataService));
+            RoomGuideDataStructure.DataService dataServiceValue = new RoomGuideDataStructure.DataService();
+            dataServiceValue.serverName = GetConfigValue("ServerName");
+            dataServiceValue.userName = GetConfigValue("UserName");
+            dataServiceValue.databaseName = GetConfigValue("Database");
+            dataServiceValue.password = GetConfigValue("Password");
+            this.sqlConnection = this.GetConnection(dataServiceValue);
         }
 
-        public DataTable ExecuteDataTable()
+        public DataService(RoomGuideDataStructure.DataService dataService)
         {
-
-            SqlConnection connection = new SqlConnection(GetConnectionString(dataService));
-            connection.Open();
-            string query = "SELECT * FROM [Members]";
-            SqlCommand sqlCommand = new SqlCommand(query, connection);
-            DataTable dt = new DataTable();
-            dt.Load(sqlCommand.ExecuteReader());
-            connection.Close();
-            return dt;
-        }
-        
-
-        private void makeConnection(RoomGuideDataStructure.DataService dataService)
-        {
-
-            SqlConnection connection = new SqlConnection(GetConnectionString(dataService));
-            connection.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Members", connection);
-            cmd.CommandType = CommandType.Text;
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
-            DataSet dataSet = new DataSet();
-            sqlDataAdapter.Fill(dataSet);
-
-            connection.Close();
+            this.sqlConnection = this.GetConnection(dataService);
         }
 
-       
-        private string GetConnectionString(RoomGuideDataStructure.DataService dataService)
+        public DataTable ExecuteDataTable(string query)
+        {
+            try
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                DataTable dataTable = new DataTable();
+                dataTable.Load(sqlCommand.ExecuteReader());
+                sqlConnection.Close();
+                return dataTable;
+            }
+            catch (Exception exception)
+            {
+                sqlConnection.Close();
+                return new DataTable();
+            }
+        }
+
+        private string GetConfigValue(string configKey)
+        {
+            var value = ConfigurationSettings.AppSettings[configKey];
+            return value;
+        }
+
+        private SqlConnection GetConnection(RoomGuideDataStructure.DataService dataService)
         {
             string connectionString = string.Empty;
-
             try
             {
                 connectionString = "Data Source=" + dataService.serverName + "; Initial Catalog=" + dataService.databaseName + ";User ID=" + dataService.userName + ";Password=" + dataService.password + ";";
-                return connectionString;
+
+                return new SqlConnection(connectionString);
             }
             catch (Exception connectionException)
             {
-                return connectionString;
+                return new SqlConnection(connectionString);
                 throw connectionException;
             }
         }

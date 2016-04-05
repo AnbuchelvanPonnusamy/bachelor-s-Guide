@@ -33,9 +33,6 @@
     <Reference Include="RGUtitlity">
       <HintPath>..\RGUtitlity\bin\Debug\RGUtitlity.dll</HintPath>
     </Reference>
-    <Reference Include="RoomGuideDataStructure">
-      <HintPath>..\RoomGuideDataStructure\bin\Debug\RoomGuideDataStructure.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,7 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RGResponse.cs" />
+    <Compile Include="RoomMembers.cs" />
     <Compile Include="User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RoomGuideDataStructure\RoomGuideDataStructure.csproj">
+      <Project>{fb5fb973-9e85-4637-847d-27f83c1fd655}</Project>
+      <Name>RoomGuideDataStructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

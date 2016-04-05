@@ -40,9 +40,6 @@
     <Reference Include="Microsoft.Practices.ObjectBuilder">
       <HintPath>E:\AnbuchelvanFiles\product\eg new\Reference\Microsoft.Practices.ObjectBuilder.dll</HintPath>
     </Reference>
-    <Reference Include="RoomGuideDataStructure">
-      <HintPath>..\RoomGuideDataStructure\bin\Debug\RoomGuideDataStructure.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,9 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.cs" />
     <Compile Include="DataService.cs" />
     <Compile Include="Encryptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RoomGuideDataStructure\RoomGuideDataStructure.csproj">
+      <Project>{fb5fb973-9e85-4637-847d-27f83c1fd655}</Project>
+      <Name>RoomGuideDataStructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
